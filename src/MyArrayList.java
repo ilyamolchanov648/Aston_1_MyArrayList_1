@@ -50,7 +50,5 @@ class MyArrayList<T> {
             throw new IndexOutOfBoundsException();
         }
     }
-    // реализация остальных методов
 
-    // вспомогательные методы
 }

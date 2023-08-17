@@ -7,4 +7,7 @@
 /dataSources/
 /dataSources.local.xml
 .git
-
+.idea
+out
+Aston_1_MyArrayList_1
+Aston_1_MyArrayList_1.iml
