@@ -67,4 +67,45 @@ class MyArrayList<T> {
         }
     }
 
+    /**
+     * Сортировка элементов списка с использованием интерфейса Comparable
+     */
+    public void sort() {
+        quickSort(0, size - 1);
+    }
+
+    /**
+     * Быстрая сортировка методом quicksort
+     */
+    private void quickSort(int low, int high) {
+        if (low >= high) {
+            return;
+        }
+
+        int pivotIndex = partition(low, high);
+        quickSort(low, pivotIndex - 1);
+        quickSort(pivotIndex + 1, high);
+    }
+
+    private int partition(int low, int high) {
+        T pivot = elements[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (elements[j].compareTo(pivot) <= 0) {
+                i++;
+                swap(i, j);
+            }
+        }
+        swap(i + 1, high);
+        return i + 1;
+    }
+
+    private void swap(int i, int j) {
+        T temp = elements[i];
+        elements[i] = elements[j];
+        elements[j] = temp;
+    }
+
+
 }
