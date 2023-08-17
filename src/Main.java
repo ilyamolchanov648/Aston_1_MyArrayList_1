@@ -2,6 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Эта строка инициализирует новый объект списка, который в дальнейшем будет использоваться
         MyArrayList<Integer> list = new MyArrayList<>();
 
         // Добавление элементов
