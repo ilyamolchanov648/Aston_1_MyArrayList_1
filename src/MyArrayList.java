@@ -1,4 +1,4 @@
-class MyArrayList<T> {
+class MyArrayList<T extends Comparable<T>> {
 
     // Объявление внутреннего массива для хранения элементов
     private T[] elements;
@@ -9,7 +9,7 @@ class MyArrayList<T> {
 
     // Конструктор - создание пустого списка с начальной емкостью 10
     public MyArrayList() {
-        elements = (T[])new Object[10];
+        elements = (T[])new Comparable[10];
     }
 
 
@@ -47,7 +47,7 @@ class MyArrayList<T> {
     // Очистка списка - сброс размера и создание нового массива
     public void clear() {
         size = 0;
-        elements = (T[])new Object[10];
+        elements = (T[])new Comparable[10];
     }
 
     // Проверка необходимости увеличения емкости
@@ -66,6 +66,8 @@ class MyArrayList<T> {
             throw new IndexOutOfBoundsException();
         }
     }
+
+
 
     /**
      * Сортировка элементов списка с использованием интерфейса Comparable
@@ -92,7 +94,10 @@ class MyArrayList<T> {
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-            if (elements[j].compareTo(pivot) <= 0) {
+
+            if (elements[j].compareTo(pivot) <= 0)
+
+            {
                 i++;
                 swap(i, j);
             }
