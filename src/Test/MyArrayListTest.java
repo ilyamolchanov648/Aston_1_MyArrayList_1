@@ -1,3 +1,8 @@
+
+package Test;
+
+import MyArray.MyArrayList;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +13,7 @@ public class MyArrayListTest {
     public void testAdd() {
         MyArrayList<Integer> list = new MyArrayList<>();
         list.add(1);
-        assertEquals(1, list.size());
+        Assert.assertEquals(1, list.size());
         assertEquals(1, (int)list.get(0));
     }
 
@@ -16,7 +21,7 @@ public class MyArrayListTest {
     public void testAddByIndex() {
         MyArrayList<Integer> list = new MyArrayList<>();
         list.add(0, 42);
-        assertEquals(1, list.size());
+        Assert.assertEquals(1, list.size());
         assertEquals(42, (int)list.get(0));
     }
 
@@ -26,7 +31,7 @@ public class MyArrayListTest {
         list.add(1);
         list.add(2);
         list.remove(0);
-        assertEquals(1, list.size());
+        Assert.assertEquals(1, list.size());
         assertEquals(2, (int)list.get(0));
     }
 

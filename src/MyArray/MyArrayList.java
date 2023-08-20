@@ -1,4 +1,4 @@
-
+package MyArray;
 
 /**
  * Класс реализует функциональность динамического списка на основе массива.
@@ -6,7 +6,7 @@
  * Элементы списка должны реализовывать интерфейс Comparable.
  * @version 0.1
  */
-class MyArrayList<T extends Comparable<T>> {
+public class MyArrayList<T extends Comparable<T>> {
 
     // Объявление внутреннего массива для хранения элементов
     /**
