@@ -6,7 +6,8 @@ package MyArray;
  * Элементы списка должны реализовывать интерфейс Comparable.
  * @version 0.1
  */
-public class MyArrayList<T extends Comparable<T>> {
+
+public class MyArrayList<T> {
 
     // Объявление внутреннего массива для хранения элементов
     /**
@@ -14,20 +15,21 @@ public class MyArrayList<T extends Comparable<T>> {
      */
     private T[] elements;
 
-
     /**
      * Текущий размер списка.
      */
     // Объявление поля для текущего размера списка
     private int size;
 
+    // Начальная емкость списка
+    private static final int INITIAL_CAPACITY = 10;
 
-    // Конструктор - создание пустого списка с начальной емкостью 10
+
+    // Конструктор - создание пустого списка с начальной емкостью
     public MyArrayList() {
-        elements = (T[])new Comparable[10];
+        elements = (T[]) new Object[INITIAL_CAPACITY];
+        size = 0;
     }
-
-
 
     // Добавление элемента в конец, увеличение размера
     /**
@@ -53,6 +55,7 @@ public class MyArrayList<T extends Comparable<T>> {
         elements[index] = item;
         size++;
     }
+
     /**
      * Возвращает элемент по индексу.
      * @param index индекс элемента
@@ -91,9 +94,8 @@ public class MyArrayList<T extends Comparable<T>> {
     // Очистка списка - сброс размера и создание нового массива
     public void clear() {
         size = 0;
-        elements = (T[])new Comparable[10];
+        elements = (T[]) new Object[INITIAL_CAPACITY];
     }
-
 
     /**
      * Проверяет необходимость увеличения вместимости внутреннего массива.
@@ -103,13 +105,11 @@ public class MyArrayList<T extends Comparable<T>> {
     // Проверка необходимости увеличения емкости
     private void ensureCapacity(int capacity) {
         if (capacity > elements.length) {
-            // создание большего массива и копирование данных
-            T[] newElements = (T[])new Object[elements.length * 2];
+            T[] newElements = (T[]) new Object[elements.length * 2];
             System.arraycopy(elements, 0, newElements, 0, size);
             elements = newElements;
         }
     }
-
 
     /**
      * Проверяет, что индекс находится в допустимых границах.
@@ -122,8 +122,6 @@ public class MyArrayList<T extends Comparable<T>> {
             throw new IndexOutOfBoundsException();
         }
     }
-
-
 
     /**
      * Сортировка элементов списка с использованием интерфейса Comparable
@@ -160,10 +158,7 @@ public class MyArrayList<T extends Comparable<T>> {
         int i = low - 1;
 
         for (int j = low; j < high; j++) {
-
-            if (elements[j].compareTo(pivot) <= 0)
-
-            {
+            if (((Comparable<T>) elements[j]).compareTo(pivot) <= 0) {
                 i++;
                 swap(i, j);
             }
@@ -182,6 +177,4 @@ public class MyArrayList<T extends Comparable<T>> {
         elements[i] = elements[j];
         elements[j] = temp;
     }
-
-
 }
