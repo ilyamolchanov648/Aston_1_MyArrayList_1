@@ -1,4 +1,5 @@
 package MyArray;
+import java.util.Comparator;
 
 /**
  * Класс реализует функциональность динамического списка на основе массива.
@@ -177,4 +178,68 @@ public class MyArrayList<T> {
         elements[i] = elements[j];
         elements[j] = temp;
     }
+
+    /**
+     * Сортировка элементов списка с использованием компаратора.
+     * Сортирует элементы списка методом быстрой сортировки.
+     *
+     * @param comparator компаратор для сравнения элементов
+     */
+    public void sort(Comparator<? super T> comparator) {
+        quickSortWithComparator(0, size - 1, comparator);
+    }
+
+    /**
+     * Быстрая сортировка методом quicksort с использованием компаратора.
+     *
+     * @param low        нижняя граница сортировки
+     * @param high       верхняя граница
+     * @param comparator компаратор для сравнения элементов
+     */
+    private void quickSortWithComparator(int low, int high, Comparator<? super T> comparator) {
+        if (low >= high) {
+            return;
+        }
+
+        int pivotIndex = partitionWithComparator(low, high, comparator);
+        quickSortWithComparator(low, pivotIndex - 1, comparator);
+        quickSortWithComparator(pivotIndex + 1, high, comparator);
+    }
+
+    /**
+     * Выполняет разделение подмассива в алгоритме quick sort с использованием компаратора.
+     *
+     * @param low        нижний индекс
+     * @param high       верхний индекс
+     * @param comparator компаратор для сравнения элементов
+     * @return индекс разделителя после перемещения
+     */
+    private int partitionWithComparator(int low, int high, Comparator<? super T> comparator) {
+        T pivot = elements[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (comparator.compare(elements[j], pivot) <= 0) {
+                i++;
+                swap(i, j);
+            }
+        }
+        swap(i + 1, high);
+        return i + 1;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(elements[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+
 }

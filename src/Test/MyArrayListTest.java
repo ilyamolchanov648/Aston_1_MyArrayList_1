@@ -5,6 +5,8 @@ import MyArray.MyArrayList; // Импорт класса MyArrayList из пак
 import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import java.util.Comparator;
+
 
 /**
  * Класс для тестирования методов класса MyArrayList.
@@ -117,5 +119,50 @@ public class MyArrayListTest {
         assertEquals(true, mixedList.get(3));
     }
 
+    @Test
+    public void test1SortWithComparator() {
+        MyArrayList<Integer> list = new MyArrayList<>();
+        list.add(5);
+        list.add(2);
+        list.add(8);
+        list.add(1);
+        list.add(3);
 
+        Comparator<Integer> descendingComparator = (a, b) -> b.compareTo(a);
+
+        System.out.println("Исходный список: " + list);
+        list.sort(descendingComparator);
+        System.out.println("Отсортировано в порядке убывания: " + list);
+
+        // Проверка ожидаемых результатов сортировки
+        assertEquals(Integer.valueOf(8), list.get(0));
+        assertEquals(Integer.valueOf(5), list.get(1));
+        assertEquals(Integer.valueOf(3), list.get(2));
+        assertEquals(Integer.valueOf(2), list.get(3));
+        assertEquals(Integer.valueOf(1), list.get(4));
+
+    }
+
+    /**
+     * Тест: сортировка списка с использованием компаратора.
+     */
+    @Test
+    public void test2SortWithComparator() {
+        MyArrayList<String> list = new MyArrayList<>();
+        list.add("banana");
+        list.add("apple");
+        list.add("grape");
+        list.add("orange");
+
+        // Создаем компаратор для сравнения строк по длине
+        Comparator<String> lengthComparator = Comparator.comparingInt(String::length);
+
+        list.sort(lengthComparator);
+
+        // Проверка, что элементы отсортированы по длине
+        assertEquals("apple", list.get(0));
+        assertEquals("grape", list.get(1));
+        assertEquals("banana", list.get(2));
+        assertEquals("orange", list.get(3));
+    }
 }
